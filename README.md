@@ -96,10 +96,6 @@ Designed an intuitive, reader-friendly layout in Power BI including:
 
 ---
 
-## 🖥️ Dashboard Preview
-
-![Dashboard]("C:\Users\Teja\OneDrive\Pictures\Screenshots\Top_Authors.png")
-
 ---
 
 
