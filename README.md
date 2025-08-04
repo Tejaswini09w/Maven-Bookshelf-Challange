@@ -1,109 +1,125 @@
 # 📚 Maven Bookshelf Challenge – Power BI Dashboard
 
-> **Submitted for:** [Maven Analytics Bookshelf Challenge](https://www.mavenanalytics.io/challenges/maven-bookshelf-challenge)  
+> **Challenge Name:** [Maven Analytics Bookshelf Challenge](https://www.mavenanalytics.io/challenges/maven-bookshelf-challenge)  
 > **Created by:** Thejaswini H  
 > **Role:** Data Analyst | Dashboard Designer  
 > **Tools Used:** Power BI, DAX, Power Query, Excel  
 
 ---
 
-## 🧩 Project Objective
+## 🎯 Project Objective
 
-To build an **interactive Power BI dashboard** that helps readers curate their **ideal summer reading list** by uncovering hidden gems, popular favorites, and genre trends using real Goodreads data.
+The goal of this project was to create an interactive Power BI dashboard using Goodreads book review data to help users build their **ideal summer reading list**. The dashboard empowers readers to explore books by genre, rating, publication year, and page count to uncover:
 
-This project demonstrates skills in **data cleaning, data modeling, dashboard creation**, and **insight generation** using large and complex datasets.
+- ⭐ Hidden literary gems  
+- 📈 Reader favorites by genre  
+- 📚 Quick, high-quality reads  
+- 🔍 Patterns in publishing and reader trends  
+
+This project focuses on solving the real problem statement — providing **personalized, data-driven book discovery**.
 
 ---
 
 ## 🗃️ Dataset Overview
 
-The dataset was provided by Maven Analytics and is based on a 2017 Goodreads public export. It includes over **1.4 million reviews**, covering **13,000+ books** and their associated metadata.
+Provided by Maven Analytics, this dataset includes:
 
-### 🔸 Tables Used:
-1. **Works.csv** – Book metadata (title, author, publication year, average rating, rating count, page count)
-2. **Genre.csv** – Book-to-genre mapping (many-to-many relationship)
-3. **Reviews.csv** – Individual user reviews (ratings, text, spoiler flags)
+- Over **1.4 million reviews**
+- More than **13,000 books**
+- Data collected from **Goodreads public user shelves** (2017)
+
+### 🔸 Files Used:
+1. `Works.csv` – Book-level data (title, author, ratings, pages, pub date)  
+2. `Genre.csv` – Genre associations for each book  
+3. `Reviews.csv` – User review ratings (no text or sentiment used in this project)
 
 ---
 
 ## 🔧 Step-by-Step Implementation
 
-### 🔹 1. **Data Import & Preparation**
-- Loaded all three CSV files into **Power BI**
-- Explored relationships:
-  - `Works` (1-to-many) → `Reviews`
-  - `Works` (1-to-many) → `Genre`
-- Created proper **data model relationships**
-- Checked for missing/null values
-- Converted data types (dates, text, integers)
+### 🔹 1. Data Loading & Relationships
+- Loaded all CSVs into **Power BI**
+- Defined relationships:
+  - `Works` → `Genre` (many-to-many via bridge)
+  - `Works` → `Reviews` (1-to-many)
 
-### 🔹 2. **Data Cleaning & Transformation**
-- Used **Power Query Editor** to:
-  - Remove duplicates and empty rows
-  - Standardize rating values
-  - Format dates and create `ReviewYear` column
-- Merged datasets to enrich `Works` with review and genre info
+### 🔹 2. Data Cleaning & Transformation
+- Removed duplicates and null values
+- Created new columns like:
+  - `Publication Year`
+  - Page bins: “<200 pages”, “200–400”, “400+”
+- Ensured consistent datatypes (dates, integers, text)
 
-### 🔹 3. **DAX Measures Created**
+### 🔹 3. Data Modeling in Power BI
+- Defined relationships to support one-to-many joins
+- Built dimensional model for genre filtering, rating analysis, etc.
+
+### 🔹 4. DAX Measures & KPIs
 - `Average Rating`
 - `Total Reviews`
-- `Review Count by Year`
-- `Books with 4.5+ Rating & <500 Reviews` → **Hidden Gems**
+- `Book Count by Genre`
+- `Books with High Ratings & Low Review Count` – Hidden Gems
 - `Avg Pages by Genre`
-- `Spoiler Review %`
-- `Sentiment Approx Score` *(basic keyword tagging method used)*
+- `Books by Publication Year`
 
-### 🔹 4. **Dashboard Visuals**
-- **Bar Chart**: Average Rating by Genre
-- **Scatter Plot**: Rating vs Rating Count (popularity vs quality)
-- **Line Chart**: Review trend over years
-- **Bubble Chart**: Avg Pages vs Avg Rating
-- **Word Cloud**: Most common positive/negative words in reviews
-- **Slicers** for Genre, Year, Rating Range, Page Count
+### 🔹 5. Dashboard Design
+Designed an intuitive, reader-friendly layout in Power BI including:
+- Bar charts for average rating by genre
+- Scatter plot of popularity vs quality
+- Year-wise publishing trends
+- Book length vs rating comparison
+- Slicers for:
+  - Genre
+  - Publication Year
+  - Rating
+  - Page Count
 
 ---
 
-## 📊 Key Insights Uncovered
+## 📊 Key Insights from the Dashboard
 
 ### 🟢 Hidden Gems
-- Identified **50+ books** with 4.5+ average rating but fewer than 500 reviews
-- Example: _“The Lost Vintage”_ – High satisfaction but low visibility
+- Books rated 4.5+ but reviewed fewer than 500 times  
+- Helped surface 50+ underrated but highly loved books
 
 ### 🟡 Genre Trends
-- **Highest Avg Ratings**: Historical Fiction, Biography, Memoir
-- **Most Reviewed Genres**: Fantasy, Romance, Thriller
+- Historical Fiction and Memoir genres have the **highest average ratings**
+- Fantasy and Romance dominate in **review volume**
 
-### 🔵 Reader Behavior
-- **Spoiler Reviews** made up ~15% of total; often appeared on highly rated books
-- Books with **fewer than 300 pages** received **more consistent high ratings**
+### 🔵 Publishing Patterns
+- Most books in dataset published between **2005–2015**
+- Book output peaked around 2010–2013
 
-### 🟠 Publication Insights
-- Peak publishing years: **2005–2015**
-- 📈 Highest growth in reviews was between 2010 and 2016
-- Older books tended to have more balanced review scores
-
-### 🔴 Sentiment Patterns
-- Reviews with words like “masterpiece”, “life-changing”, and “couldn’t put it down” heavily correlated with 5⭐ ratings
-- Negative reviews included terms like “predictable”, “boring”, “flat ending”
+### 🟠 Reader Preferences
+- Shorter books (<300 pages) tend to receive **more consistent positive ratings**
+- Mid-length books (200–400 pages) make up the majority of highly rated titles
 
 ---
 
-## 🖥️ Dashboard Demo (Screenshots)
+## 🖥️ Dashboard Preview
 
-📌 [Insert screenshot previews here, like dashboard-overview.png, hidden-gems-chart.png]
-
----
-
-## 🔄 Filters & Slicers Available
-
-| Slicer | Purpose |
-|--------|---------|
-| **Genre** | View trends within a specific genre |
-| **Rating Range** | Focus on high/low rated books |
-| **Publication Year** | Analyze historical trends |
-| **Pages Range** | Filter books by length (e.g., quick reads) |
+![Dashboard]("C:\Users\Teja\OneDrive\Pictures\Screenshots\Top_Authors.png")
 
 ---
 
-## 📁 Folder Structure
+
+---
+
+## 🧠 Learnings
+
+- Practiced data modeling with real-world relational datasets  
+- Used Power BI to create interactive and story-driven visualizations  
+- Gained experience in DAX for aggregations and custom KPIs  
+- Designed user-centric filters to support personalized discovery  
+
+---
+
+## 🙌 Let's Connect
+
+**Thejaswini H**  
+📧 thejaswiniv5@gmail.com  
+
+> _“Data tells stories — this one helps you find yours on the shelf.”_
+
+
 
